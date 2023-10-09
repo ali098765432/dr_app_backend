@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Logo</title>
+</head>
+<body>
+  <h1>Create Logo</h1>
+  <form id="logo-form">
+    <label for="symbol1">Symbol 1:</label>
+    <input type="text" name="symbol1" id="symbol1" value="✿" required>
+    <br>
+    <label for="symbol2">Symbol 2:</label>
+    <input type="text" name="symbol2" id="symbol2" value="❤️" required>
+    <br>
+    <label for="color1">Color 1:</label>
+    <input type="color" name="color1" id="color1" value="#FF5733" required>
+    <br>
+    <label for="color2">Color 2:</label>
+    <input type="color" name="color2" id="color2" value="#33FF57" required>
+    <br>
+    <input type="submit" value="Generate Logo">
+  </form>
+  <h2>Generated Logo:</h2>
+  <div id="logo-container">
+    <div id="generated-logo"></div>
+  </div>
+
+  <script>
+    const logoForm = document.getElementById('logo-form');
+    const logoContainer = document.getElementById('logo-container');
+    const generatedLogo = document.getElementById('generated-logo');
+
+    logoForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(logoForm);
+
+      try {
+        const response = await fetch('/logo/createLogo', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const imageUrl = await response.text();
+          generatedLogo.innerHTML = ''; // Clear any previous logo
+          generatedLogo.innerHTML = imageUrl;
+          logoContainer.style.display = 'block';
+        } else {
+          console.error('Error generating logo:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error generating logo:', error);
+      }
+    });
+  </script>
+</body>
+</html>
