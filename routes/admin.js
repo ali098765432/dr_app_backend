@@ -160,7 +160,6 @@ router.post('/register', async (req, resp) => {
   }
 
   try {
-    // Check if the email already exists in the database
     const checkEmailQuery = 'SELECT * FROM admin WHERE email = ?';
     db.query(checkEmailQuery, [email], async (err, users) => {
       if (err) {
