@@ -155,7 +155,6 @@ router.post('/register', async (req, resp) => {
     return resp.status(400).json({ result: 'Invalid email format.' });
   }
 
-  // Validation: Check if the password is strong enough (example: at least 6 characters)
   if (password.length < 6) {
     return resp.status(400).json({ result: 'Password should be at least 6 characters long.' });
   }
