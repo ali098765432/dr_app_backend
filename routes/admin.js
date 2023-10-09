@@ -166,7 +166,7 @@ router.post('/register', async (req, resp) => {
         console.error('Error while checking email:', err);
         return resp.status(500).json({ error: 'Something went wrong, please try again.' });
       }
-s
+
       if (users.length > 0) {
         return resp.status(409).json({ result: 'Email already exists.' });
       }
