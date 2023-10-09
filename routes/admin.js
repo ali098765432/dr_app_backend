@@ -47,7 +47,6 @@ router.post('/login', async (req, resp) => {
 
       const user = users[0];
 
-      // Compare the hashed password with the provided password
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (passwordMatch) {
@@ -146,7 +145,6 @@ router.post('/logout', async (req, resp) => {
 router.post('/register', async (req, resp) => {
   let { email, password, name, role } = req.body;
 
-  // Validation: Check if all required fields are provided
   if (!email || !password || !name || !role) {
     return resp.status(400).json({ result: 'Please provide email, password, name, and role.' });
   }
